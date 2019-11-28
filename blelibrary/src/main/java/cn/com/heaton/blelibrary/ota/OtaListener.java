@@ -1,7 +1,6 @@
 package cn.com.heaton.blelibrary.ota;
 
 /**
- *
  * Created by LiuLei on 2017/6/7.
  */
 

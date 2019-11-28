@@ -36,16 +36,16 @@ android {
             output.outputFile = new File(output.outputFile.parent, output.outputFile.name.replace(".apk", "-" + defaultConfig.versionName + defaultConfig.versionNameSuffix + ".apk"));
         }
     }*/
-   /* applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            def outputFile = output.outputFile
-            if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                // 这里添加productFlavors的名字，输出apk名称为BLE-v2.0.0b-beat.apk
-                def fileName = "BLE-v${defaultConfig.versionName}$defaultConfig.versionNameSuffix-${variant.productFlavors[0].name}.apk"
-                output.outputFile = new File(outputFile.parent, fileName)
-            }
-        }
-    }*/
+    /* applicationVariants.all { variant ->
+         variant.outputs.each { output ->
+             def outputFile = output.outputFile
+             if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                 // 这里添加productFlavors的名字，输出apk名称为BLE-v2.0.0b-beat.apk
+                 def fileName = "BLE-v${defaultConfig.versionName}$defaultConfig.versionNameSuffix-${variant.productFlavors[0].name}.apk"
+                 output.outputFile = new File(outputFile.parent, fileName)
+             }
+         }
+     }*/
 
     flavorDimensions "default"
     productFlavors {
@@ -54,7 +54,7 @@ android {
     }
 
     productFlavors.all {
-        flavor -> flavor.manifestPlaceholders = [NAME_VALUE : name]
+        flavor -> flavor.manifestPlaceholders = [NAME_VALUE: name]
     }
 }
 

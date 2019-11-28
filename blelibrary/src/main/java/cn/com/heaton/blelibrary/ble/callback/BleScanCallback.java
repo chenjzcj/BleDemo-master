@@ -6,19 +6,26 @@ package cn.com.heaton.blelibrary.ble.callback;
 
 public abstract class BleScanCallback<T> {
     /**
-     *  Start the scan
+     * Start the scan
      */
-    public void onStart(){};
+    public void onStart() {
+    }
+
+    ;
 
     /**
-     *  Stop scanning
+     * Stop scanning
      */
-    public void onStop(){};
+    public void onStop() {
+    }
+
+    ;
 
     /**
      * Scan to device
-     * @param device ble device object
-     * @param rssi rssi
+     *
+     * @param device     ble device object
+     * @param rssi       rssi
      * @param scanRecord Bluetooth radio package
      */
     public abstract void onLeScan(T device, int rssi, byte[] scanRecord);

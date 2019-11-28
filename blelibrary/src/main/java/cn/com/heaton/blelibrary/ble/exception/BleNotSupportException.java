@@ -1,7 +1,6 @@
 package cn.com.heaton.blelibrary.ble.exception;
 
 /**
- *
  * Created by LiuLei on 2017/10/19.
  */
 

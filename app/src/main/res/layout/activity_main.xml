@@ -9,13 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="BLE模块"
-        android:onClick="ble"/>
+        android:onClick="ble" />
 
     <Button
         android:id="@+id/spp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="SPP模块"
-        android:onClick="spp"/>
+        android:onClick="spp" />
 
 </LinearLayout>

@@ -37,8 +37,7 @@ import java.util.UUID;
  * 一个线程用来监听连接请求
  * 一个线程用来传输数据.
  */
-public class BluetoothSPPService implements Handler.Callback
-{
+public class BluetoothSPPService implements Handler.Callback {
     // 调试
     private static final String TAG = "BluetoothChatService";
     private static final boolean D = true;
@@ -75,13 +74,15 @@ public class BluetoothSPPService implements Handler.Callback
     private static final int MESSAGE_READ = 0x13;
     private static final int MESSAGE_WRITE = 0x14;
     private static final int MESSAGE_ERROR = 0x15;
+
     /**
      * 构造函数。准备一个新的BluetoothChat会话.
-     * @param context  UI活动背景
+     *
+     * @param context UI活动背景
      */
     public BluetoothSPPService(Context context, BluetoothDeviceListener bluetoothDeviceListener) {
         mContext = context;
-        mHandler = new Handler(mContext.getMainLooper(),this);
+        mHandler = new Handler(mContext.getMainLooper(), this);
         mAdapter = BluetoothAdapter.getDefaultAdapter();    //获取蓝牙Adapter
         mState = STATE_NONE;                                //设置状态
         mBluetoothDeviceListener = bluetoothDeviceListener;
@@ -89,35 +90,35 @@ public class BluetoothSPPService implements Handler.Callback
 
     @Override
     public boolean handleMessage(Message msg) {
-        if(msg == null){
+        if (msg == null) {
             return false;
         }
-        switch(msg.what){
+        switch (msg.what) {
             case MESSAGE_STATE_CHANGE:
-                if(mBluetoothDeviceListener != null){
+                if (mBluetoothDeviceListener != null) {
                     mBluetoothDeviceListener.onStateChanged(msg.arg1);
                 }
                 break;
             case MESSAGE_DEVICE_NAME:
-                if(mBluetoothDeviceListener != null){
-                    if(msg.obj != null && msg.obj instanceof String){
+                if (mBluetoothDeviceListener != null) {
+                    if (msg.obj != null && msg.obj instanceof String) {
                         BluetoothDevice device = mAdapter.getRemoteDevice((String) msg.obj);
                         mBluetoothDeviceListener.onConnected(device);
                     }
                 }
                 break;
             case MESSAGE_READ:
-                if(mBluetoothDeviceListener != null){
+                if (mBluetoothDeviceListener != null) {
                     mBluetoothDeviceListener.onRead((byte[]) msg.obj);
                 }
                 break;
             case MESSAGE_WRITE:
-                if(mBluetoothDeviceListener != null){
+                if (mBluetoothDeviceListener != null) {
                     mBluetoothDeviceListener.onWrite((byte[]) msg.obj);
                 }
                 break;
             case MESSAGE_ERROR:
-                if(mBluetoothDeviceListener != null){
+                if (mBluetoothDeviceListener != null) {
                     mBluetoothDeviceListener.onError(String.valueOf(msg.obj));
                 }
                 break;
@@ -129,7 +130,8 @@ public class BluetoothSPPService implements Handler.Callback
 
     /**
      * 设置当前的状态
-     * @param state  一个整形变量用来标志当前的状态
+     *
+     * @param state 一个整形变量用来标志当前的状态
      */
     private synchronized void setState(int state) {
         if (D)
@@ -140,22 +142,30 @@ public class BluetoothSPPService implements Handler.Callback
     }
 
     /**
-     * 返回当前的连接状态. */
+     * 返回当前的连接状态.
+     */
     public synchronized int getState() {
         return mState;
     }
 
     /**
      * 启动服务. 启动AcciceptThread 启动一个任务来监听在服务模式
-     * Activity onResume()之后调用 */
+     * Activity onResume()之后调用
+     */
     public synchronized void start() {
         if (D) Log.d(TAG, "start");
 
         // 如果请求链接线程已经存在.先取消
-        if (mConnectThread != null) {mConnectThread.cancel(); mConnectThread = null;}
+        if (mConnectThread != null) {
+            mConnectThread.cancel();
+            mConnectThread = null;
+        }
 
         // 当前已经链接
-        if (mConnectedThread != null) {mConnectedThread.cancel(); mConnectedThread = null;}
+        if (mConnectedThread != null) {
+            mConnectedThread.cancel();
+            mConnectedThread = null;
+        }
 
         //设置状态为监听
         setState(STATE_LISTEN);
@@ -173,20 +183,26 @@ public class BluetoothSPPService implements Handler.Callback
 
     /**
      * 启动ConnectThread发起一个连接到远程设备.
-     * @param device  需要链接的设备
+     *
+     * @param device 需要链接的设备
      * @param secure Socket 安全类型 - 安全 (true) , 不安全 (false)
      */
-    public synchronized void connect(BluetoothDevice device, boolean secure)
-    {
+    public synchronized void connect(BluetoothDevice device, boolean secure) {
         if (D) Log.d(TAG, "connect to: " + device);
 
         // 取消任何线程试图建立连接
         if (mState == STATE_CONNECTING) {
-            if (mConnectThread != null) {mConnectThread.cancel(); mConnectThread = null;}
+            if (mConnectThread != null) {
+                mConnectThread.cancel();
+                mConnectThread = null;
+            }
         }
 
         // 取消任何线程正在运行一个连接
-        if (mConnectedThread != null) {mConnectedThread.cancel(); mConnectedThread = null;}
+        if (mConnectedThread != null) {
+            mConnectedThread.cancel();
+            mConnectedThread = null;
+        }
 
         // 启动线程与给定的设备
         mConnectThread = new ConnectThread(device, secure);
@@ -197,18 +213,25 @@ public class BluetoothSPPService implements Handler.Callback
 
     /**
      * 启动ConnectedThread开始管理一个蓝牙连接
-     * @param socket  链接socket
-     * @param device  已经链接的蓝牙设备
+     *
+     * @param socket 链接socket
+     * @param device 已经链接的蓝牙设备
      */
     public synchronized void connected(BluetoothSocket socket, BluetoothDevice
             device, final String socketType) {
         if (D) Log.d(TAG, "connected, Socket Type:" + socketType);
 
         // 完成连接之后取消链接的线程
-        if (mConnectThread != null) {mConnectThread.cancel(); mConnectThread = null;}
+        if (mConnectThread != null) {
+            mConnectThread.cancel();
+            mConnectThread = null;
+        }
 
         // 取消任何线程正在运行一个连接
-        if (mConnectedThread != null) {mConnectedThread.cancel(); mConnectedThread = null;}
+        if (mConnectedThread != null) {
+            mConnectedThread.cancel();
+            mConnectedThread = null;
+        }
 
         // 取消接受线程,因为我们只希望连接到一个设备
         if (mSecureAcceptThread != null) {
@@ -235,8 +258,7 @@ public class BluetoothSPPService implements Handler.Callback
     /**
      * 停止所有线程
      */
-    public synchronized void stop()
-    {
+    public synchronized void stop() {
 
         if (D) Log.d(TAG, "stop");
 
@@ -266,6 +288,7 @@ public class BluetoothSPPService implements Handler.Callback
 
     /**
      * 用非同步的方式写入到 ConnectedThread
+     *
      * @param out 字节写
      * @see ConnectedThread#write(byte[])
      */
@@ -284,10 +307,9 @@ public class BluetoothSPPService implements Handler.Callback
     /**
      * 表明,该连接请求失败并通知UI的活动。
      */
-    private void connectionFailed()
-    {
+    private void connectionFailed() {
         // 发送链接失败返回给UI Activity
-        Message msg = mHandler.obtainMessage(MESSAGE_ERROR,"无法连接到设备");
+        Message msg = mHandler.obtainMessage(MESSAGE_ERROR, "无法连接到设备");
         mHandler.sendMessage(msg);
         // 进入listen模式
         BluetoothSPPService.this.start();
@@ -298,7 +320,7 @@ public class BluetoothSPPService implements Handler.Callback
      */
     private void connectionLost() {
         // 发送一个失败消息返回给Activity
-        Message msg = mHandler.obtainMessage(MESSAGE_ERROR,"设备连接已断开");
+        Message msg = mHandler.obtainMessage(MESSAGE_ERROR, "设备连接已断开");
         mHandler.sendMessage(msg);
 
         // 在重新启动监听模式启动该服务
@@ -309,8 +331,7 @@ public class BluetoothSPPService implements Handler.Callback
      * 这个线程运行,监听传入的连接. 他像一个服务器端的客户端,当连接建立时.会进入运行状态
      * (或者是.直到取消).
      */
-    private class AcceptThread extends Thread
-    {
+    private class AcceptThread extends Thread {
         // 本地Server Socket
         private final BluetoothServerSocket mmServerSocket;
 
@@ -318,13 +339,12 @@ public class BluetoothSPPService implements Handler.Callback
         private String mSocketType;
 
         //构造函数
-        public AcceptThread(boolean secure)
-        {
+        public AcceptThread(boolean secure) {
             //Tmp变量
             BluetoothServerSocket tmp = null;
 
             //初始化类型
-            mSocketType = secure ? "Secure":"Insecure";
+            mSocketType = secure ? "Secure" : "Insecure";
 
             // 创建一个服务的Listener
             try {
@@ -340,8 +360,7 @@ public class BluetoothSPPService implements Handler.Callback
         }
 
         //进入线程的While
-        public void run()
-        {
+        public void run() {
             if (D) Log.d(TAG, "Socket Type: " + mSocketType + "BEGIN mAcceptThread" + this);
             setName("AcceptThread" + mSocketType);
 
@@ -349,8 +368,7 @@ public class BluetoothSPPService implements Handler.Callback
             BluetoothSocket socket = null;
 
             // 如果没有进入已链接状态的话.会持续的进入此操作
-            while (mState != STATE_CONNECTED)
-            {
+            while (mState != STATE_CONNECTED) {
                 try {
                     // 这是一个阻塞的链接.除非链接完成.或者是发生异常
                     socket = mmServerSocket.accept();
@@ -359,26 +377,23 @@ public class BluetoothSPPService implements Handler.Callback
                     break;
                 }
                 // 如果一个连接被接受
-                if (socket != null)
-                {
-                    synchronized (BluetoothSPPService.this)
-                    {
-                        switch (mState)
-                        {
-                        case STATE_LISTEN:
-                        case STATE_CONNECTING:
-                            // 状态正常.开始连接线程。
-                            connected(socket, socket.getRemoteDevice(), mSocketType);
-                            break;
-                        case STATE_NONE:
-                        case STATE_CONNECTED:
-                            // 没有准备好或已经连接。终止新的套接字
-                            try {
-                                socket.close();
-                            } catch (IOException e) {
-                                Log.e(TAG, "Could not close unwanted socket", e);
-                            }
-                            break;
+                if (socket != null) {
+                    synchronized (BluetoothSPPService.this) {
+                        switch (mState) {
+                            case STATE_LISTEN:
+                            case STATE_CONNECTING:
+                                // 状态正常.开始连接线程。
+                                connected(socket, socket.getRemoteDevice(), mSocketType);
+                                break;
+                            case STATE_NONE:
+                            case STATE_CONNECTED:
+                                // 没有准备好或已经连接。终止新的套接字
+                                try {
+                                    socket.close();
+                                } catch (IOException e) {
+                                    Log.e(TAG, "Could not close unwanted socket", e);
+                                }
+                                break;
                         }
                     }
                 }
@@ -386,6 +401,7 @@ public class BluetoothSPPService implements Handler.Callback
             if (D) Log.i(TAG, "END mAcceptThread, socket Type: " + mSocketType);
 
         }
+
         //取消此线程
         public void cancel() {
             if (D) Log.d(TAG, "Socket Type" + mSocketType + "cancel " + this);
@@ -401,8 +417,7 @@ public class BluetoothSPPService implements Handler.Callback
     /**
      * 这个线程运行而试图使一个外向与设备连接. 它会持续到;链接成功或者是失败.
      */
-    private class ConnectThread extends Thread
-    {
+    private class ConnectThread extends Thread {
         //socket
         private final BluetoothSocket mmSocket;
         //远程设备
@@ -411,8 +426,7 @@ public class BluetoothSPPService implements Handler.Callback
         private String mSocketType;
 
         //构造函数
-        public ConnectThread(BluetoothDevice device, boolean secure)
-        {
+        public ConnectThread(BluetoothDevice device, boolean secure) {
             //链接
             mmDevice = device;
             //
@@ -433,8 +447,7 @@ public class BluetoothSPPService implements Handler.Callback
             mmSocket = tmp;
         }
 
-        public void run()
-        {
+        public void run() {
             //socket类型
             Log.i(TAG, "BEGIN mConnectThread SocketType:" + mSocketType);
 
@@ -482,17 +495,16 @@ public class BluetoothSPPService implements Handler.Callback
      * 这个线程运行在一个远程设备的连接.
      * 它处理所有传入和传出的传输.
      */
-    private class ConnectedThread extends Thread
-    {
+    private class ConnectedThread extends Thread {
         //socket
         private final BluetoothSocket mmSocket;
         //输入流
         private final InputStream mmInStream;
         //输出流
         private final OutputStream mmOutStream;
+
         //
-        public ConnectedThread(BluetoothSocket socket, String socketType)
-        {
+        public ConnectedThread(BluetoothSocket socket, String socketType) {
             Log.d(TAG, "create ConnectedThread: " + socketType);
             mmSocket = socket;
 
@@ -511,8 +523,7 @@ public class BluetoothSPPService implements Handler.Callback
             mmOutStream = tmpOut;
         }
 
-        public void run()
-        {
+        public void run() {
             Log.i(TAG, "BEGIN mConnectedThread");
             //创建缓冲区
             byte[] buffer = new byte[1024];
@@ -524,11 +535,11 @@ public class BluetoothSPPService implements Handler.Callback
                     // 输入流
                     bytes = mmInStream.read(buffer);
                     byte[] b;
-                    if(bytes <0 ){
+                    if (bytes < 0) {
                         b = new byte[0];
-                    }else{
+                    } else {
                         b = new byte[bytes];
-                        System.arraycopy(buffer,0,b,0,bytes);
+                        System.arraycopy(buffer, 0, b, 0, bytes);
                     }
 
                     // 发送到UI
@@ -550,7 +561,8 @@ public class BluetoothSPPService implements Handler.Callback
 
         /**
          * 写入到输出流
-         * @param buffer  The bytes to write
+         *
+         * @param buffer The bytes to write
          */
         public void write(byte[] buffer) {
             try {
@@ -562,6 +574,7 @@ public class BluetoothSPPService implements Handler.Callback
                 Log.e(TAG, "Exception during write", e);
             }
         }
+
         //取消线程
         public void cancel() {
             try {
@@ -572,11 +585,15 @@ public class BluetoothSPPService implements Handler.Callback
         }
     }
 
-    public interface  BluetoothDeviceListener{
+    public interface BluetoothDeviceListener {
         public void onStateChanged(int state);
+
         public void onConnected(BluetoothDevice device);
+
         public void onError(String msg);
+
         public void onRead(byte[] buffer);
+
         public void onWrite(byte[] buffer);
     }
 }

@@ -14,19 +14,17 @@ import java.io.OutputStream;
 
 public class FileUtils {
 
-    public static void copyBigDataToSD(Context context, String assetPath, String strOutFileName) throws IOException
-    {
+    public static void copyBigDataToSD(Context context, String assetPath, String strOutFileName) throws IOException {
         InputStream myInput;
         OutputStream myOutput = new FileOutputStream(strOutFileName);
         myInput = context.getAssets().open(assetPath);
         byte[] buffer = new byte[1024];
         int length = myInput.read(buffer);
-        while(length > 0)
-        {
+        while (length > 0) {
             myOutput.write(buffer, 0, length);
             length = myInput.read(buffer);
         }
-        Log.e("FlieUtils==","复制到sd卡完成");
+        Log.e("FlieUtils==", "复制到sd卡完成");
 
         myOutput.flush();
         myInput.close();

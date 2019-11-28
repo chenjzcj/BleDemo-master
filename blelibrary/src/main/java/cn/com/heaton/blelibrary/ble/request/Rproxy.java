@@ -15,21 +15,21 @@ public class Rproxy {
 
     private Map<Class, Object> mRequestObjs;
 
-    public static Rproxy getInstance(){
+    public static Rproxy getInstance() {
         return s_instance;
     }
 
-    private Rproxy(){
+    private Rproxy() {
         mRequestObjs = new HashMap<>();
     }
 
-    public void init(Class... clss){
-        List<Class>list = new LinkedList<>();
-        for(Class cls : clss){
-            if(cls.isAnnotationPresent(Implement.class)){
+    public void init(Class... clss) {
+        List<Class> list = new LinkedList<>();
+        for (Class cls : clss) {
+            if (cls.isAnnotationPresent(Implement.class)) {
                 list.add(cls);
-                for(Annotation ann : cls.getDeclaredAnnotations()){
-                    if(ann instanceof Implement){
+                for (Annotation ann : cls.getDeclaredAnnotations()) {
+                    if (ann instanceof Implement) {
                         try {
                             mRequestObjs.put(cls, ((Implement) ann).value().newInstance());
                         } catch (InstantiationException e) {
@@ -43,7 +43,7 @@ public class Rproxy {
         }
     }
 
-    public <T>T getRequest(Class cls){
+    public <T> T getRequest(Class cls) {
         return (T) mRequestObjs.get(cls);
     }
 

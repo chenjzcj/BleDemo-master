@@ -1,6 +1,7 @@
 package cn.com.heaton.blelibrary.ble;
 
-/**This class is provide interface for BLE states
+/**
+ * This class is provide interface for BLE states
  * Created by liulei on 2016/11/25.
  */
 

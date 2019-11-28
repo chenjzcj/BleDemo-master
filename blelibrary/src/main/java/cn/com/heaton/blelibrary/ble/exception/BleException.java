@@ -4,11 +4,10 @@ import java.io.Serializable;
 
 
 /**
- *
  * Created by LiuLei on 2017/10/19.
  */
 
-public class BleException extends Exception implements Serializable{
+public class BleException extends Exception implements Serializable {
 
     private static final long serialVersionUID = -3677084962477320584L;
 
@@ -21,11 +20,11 @@ public class BleException extends Exception implements Serializable{
 
     private Throwable ex;
 
-    public BleException(){
+    public BleException() {
         super();
     }
 
-    public BleException(String message){
+    public BleException(String message) {
         super(message);
     }
 

@@ -36,9 +36,11 @@ import cn.com.heaton.blelibrary.ble.request.ScanRequest;
  * Created by liulei on 2016/12/7.
  */
 
-public class Ble<T extends BleDevice> implements BleLisenter<T>{
+public class Ble<T extends BleDevice> implements BleLisenter<T> {
 
-    /** Log tag, apps may override it. */
+    /**
+     * Log tag, apps may override it.
+     */
     private final static String TAG = "Ble";
 
     private static volatile Ble instance;
@@ -76,13 +78,14 @@ public class Ble<T extends BleDevice> implements BleLisenter<T>{
     }
 
     /**
-     *  蓝牙初始化
+     * 蓝牙初始化
+     *
      * @param context 上下文对象
-     * @param opts 蓝牙相关参数
+     * @param opts    蓝牙相关参数
      * @return 初始化是否成功
      */
-    public boolean init(Context context,Options opts){
-        if(opts == null){
+    public boolean init(Context context, Options opts) {
+        if (opts == null) {
             opts = new Options();
         }
         mOptions = opts;
@@ -93,20 +96,21 @@ public class Ble<T extends BleDevice> implements BleLisenter<T>{
                 .bindProxy(RequestImpl.getInstance(opts));
 
         boolean result = instance.startService(context);
-        L.w(TAG, "bind service result is"+ result);
+        L.w(TAG, "bind service result is" + result);
         return result;
     }
 
     /**
      * 开始扫描
+     *
      * @param callback 扫描回调
      */
-    public void startScan(BleScanCallback<T> callback){
+    public void startScan(BleScanCallback<T> callback) {
         mRequest.startScan(callback);
     }
 
     /*停止扫描*/
-    public void stopScan(){
+    public void stopScan() {
         mRequest.stopScan();
     }
 
@@ -157,46 +161,50 @@ public class Ble<T extends BleDevice> implements BleLisenter<T>{
 
     /**
      * 连接成功后，开始设置通知
-     * @param device 蓝牙设备对象
+     *
+     * @param device   蓝牙设备对象
      * @param callback 通知回调
      */
-    public void startNotify(T device, BleNotiftCallback<T> callback){
+    public void startNotify(T device, BleNotiftCallback<T> callback) {
         mRequest.notify(device, callback);
     }
 
     /**
      * 读取数据
-     * @param device 蓝牙设备对象
+     *
+     * @param device   蓝牙设备对象
      * @param callback 读取结果回调
      */
-    public boolean read(T device, BleReadCallback<T> callback){
+    public boolean read(T device, BleReadCallback<T> callback) {
         return mRequest.read(device, callback);
     }
 
     /**
      * 读取远程RSSI
-     * @param device 蓝牙设备对象
+     *
+     * @param device   蓝牙设备对象
      * @param callback 读取远程RSSI结果回调
      */
-    public void readRssi(T device, BleReadRssiCallback<T> callback){
+    public void readRssi(T device, BleReadRssiCallback<T> callback) {
         mRequest.readRssi(device, callback);
     }
 
     /**
      * 写入数据
-     * @param device 蓝牙设备对象
-     * @param data 写入数据字节数组
+     *
+     * @param device   蓝牙设备对象
+     * @param data     写入数据字节数组
      * @param callback 写入结果回调
      * @return 写入是否成功
      */
-    public boolean write(T device, byte[]data, BleWriteCallback<T> callback){
+    public boolean write(T device, byte[] data, BleWriteCallback<T> callback) {
         return mRequest.write(device, data, callback);
     }
 
     /*获取当前类的类型*/
-    public Class<T> getClassType(){
+    public Class<T> getClassType() {
         Type genType = this.getClass().getGenericSuperclass();
-        Class<T> entityClass = (Class<T>)((ParameterizedType)genType).getActualTypeArguments()[0];
+        Class<T> entityClass = (Class<T>) ((ParameterizedType) genType).getActualTypeArguments()[0];
         return entityClass;
     }
 
@@ -230,7 +238,7 @@ public class Ble<T extends BleDevice> implements BleLisenter<T>{
         }
     }
 
-    public static <T extends BleDevice> Ble<T> getInstance(){
+    public static <T extends BleDevice> Ble<T> getInstance() {
         if (instance == null) {
             synchronized (Ble.class) {
                 if (instance == null) {
@@ -243,6 +251,7 @@ public class Ble<T extends BleDevice> implements BleLisenter<T>{
 
     /**
      * 获取自定义蓝牙服务对象
+     *
      * @return 自定义蓝牙服务对象
      */
     public BluetoothLeService getBleService() {
@@ -262,7 +271,7 @@ public class Ble<T extends BleDevice> implements BleLisenter<T>{
         }
         if (bll) {
             L.i(TAG, "service bind succseed!!!");
-        } else if(mOptions.throwBleException){
+        } else if (mOptions.throwBleException) {
             try {
                 throw new BleServiceException("Bluetooth service binding failed," +
                         "Please check whether the service is registered in the manifest file!");
@@ -289,7 +298,7 @@ public class Ble<T extends BleDevice> implements BleLisenter<T>{
         public void onServiceConnected(ComponentName componentName,
                                        IBinder service) {
             mBluetoothLeService = ((BluetoothLeService.LocalBinder) service).getService();
-            if(instance != null)
+            if (instance != null)
                 mBluetoothLeService.setBleManager(instance, mOptions);
 
             L.e(TAG, "Service connection successful");
@@ -311,12 +320,13 @@ public class Ble<T extends BleDevice> implements BleLisenter<T>{
 
     /**
      * 获取指定位置的蓝牙对象
+     *
      * @param index 指定位置
      * @return 指定位置蓝牙对象
      */
     public T getBleDevice(int index) {
         ConnectRequest request = Rproxy.getInstance().getRequest(ConnectRequest.class);
-        if(request != null){
+        if (request != null) {
             return (T) request.getBleDevice(index);
         }
         return null;
@@ -324,12 +334,13 @@ public class Ble<T extends BleDevice> implements BleLisenter<T>{
 
     /**
      * 获取对应蓝牙对象
+     *
      * @param device 原生蓝牙对象
      * @return 对应蓝牙对象
      */
     public T getBleDevice(BluetoothDevice device) {
         ConnectRequest request = Rproxy.getInstance().getRequest(ConnectRequest.class);
-        if(request != null){
+        if (request != null) {
             return (T) request.getBleDevice(device);
         }
         return null;
@@ -360,13 +371,12 @@ public class Ble<T extends BleDevice> implements BleLisenter<T>{
     }
 
     /**
-     *
      * @return 已经连接的设备集合
      */
 
     public ArrayList<T> getConnetedDevices() {
         ConnectRequest request = Rproxy.getInstance().getRequest(ConnectRequest.class);
-        if(request != null){
+        if (request != null) {
             return request.getConnetedDevices();
         }
         return null;
@@ -418,7 +428,7 @@ public class Ble<T extends BleDevice> implements BleLisenter<T>{
             }
         }
         if (device.isAutoConnect()) {
-            L.w(TAG, "addAutoPool: "+"Add automatic connection device to the connection pool");
+            L.w(TAG, "addAutoPool: " + "Add automatic connection device to the connection pool");
             mAutoDevices.add(device);
         }
     }
@@ -426,9 +436,10 @@ public class Ble<T extends BleDevice> implements BleLisenter<T>{
 
     /**
      * 当Application退出时，释放所有资源
+     *
      * @param context 上下文对象
      */
-    public void destory(Context context){
+    public void destory(Context context) {
         unService(context);
     }
 
@@ -446,7 +457,6 @@ public class Ble<T extends BleDevice> implements BleLisenter<T>{
 //    }
 
     /**
-     *
      * @return 是否支持蓝牙
      */
     public boolean isSupportBle(Context context) {
@@ -454,7 +464,6 @@ public class Ble<T extends BleDevice> implements BleLisenter<T>{
     }
 
     /**
-     *
      * @return 蓝牙是否打开
      */
     public boolean isBleEnable() {
@@ -485,7 +494,7 @@ public class Ble<T extends BleDevice> implements BleLisenter<T>{
     /**
      * 蓝牙相关参数配置类
      */
-    public static class Options extends BluetoothLeService.Options{
+    public static class Options extends BluetoothLeService.Options {
         /**
          * 是否打印蓝牙日志
          */

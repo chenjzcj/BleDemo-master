@@ -135,7 +135,7 @@ public class DeviceControlActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String s = BodyCHOLRead(sb.toString());
-                Logger.d(TAG, "onClick: 结果"+s);
+                Logger.d(TAG, "onClick: 结果" + s);
             }
         });
     }
@@ -200,10 +200,12 @@ public class DeviceControlActivity extends Activity {
             }
         });
     }
+
     StringBuffer sb = new StringBuffer();
+
     private void displayData(String data) {
         sb.append(data);
-        Logger.d(TAG, "displayData: "+sb.toString());
+        Logger.d(TAG, "displayData: " + sb.toString());
     }
 
     // Demonstrates how to iterate through the supported GATT
@@ -218,7 +220,7 @@ public class DeviceControlActivity extends Activity {
         // Loops through available GATT Services.
         for (BluetoothGattService gattService : gattServices) {
             uuid = gattService.getUuid().toString();
-            Logger.d(TAG, "displayGattServices: "+uuid);
+            Logger.d(TAG, "displayGattServices: " + uuid);
             List<BluetoothGattCharacteristic> gattCharacteristics = gattService.getCharacteristics();
             for (BluetoothGattCharacteristic gattCharacteristic : gattCharacteristics) {
                 uuid = gattCharacteristic.getUuid().toString();
@@ -284,68 +286,69 @@ public class DeviceControlActivity extends Activity {
 
     /**
      * 分析胆固醇数据
+     *
      * @param data
      * @return
      */
     public static String BodyCHOLRead(String data) {
         // 根据换行符分割
         String[] datas = data.split(print10("0A"));
-        for (int i = 0 ; i < datas.length; i ++) {
-            Logger.d(TAG, String.format("split[%s]:%s",i, datas[i]));
+        for (int i = 0; i < datas.length; i++) {
+            Logger.d(TAG, String.format("split[%s]:%s", i, datas[i]));
         }
         String unit = "";
         String data7 = datas[7].split("\"")[1].split(":")[1].trim();
-        if(data7.contains("mmol/L")){
+        if (data7.contains("mmol/L")) {
             unit = "mmol/L";
         }
 
         StringBuilder sbr = new StringBuilder();
-        for (int i = 7,j = 0; i < 11 ; i ++,j ++) {
+        for (int i = 7, j = 0; i < 11; i++, j++) {
             String values = datas[i].split("\"")[1].split(":")[1].trim();//207 mg/dL
             String[] results = values.split(" +");
             System.out.println("值~~~~~" + values + "分割长度:" + results.length);
             String value = "----";
 
-            if(results.length == 3){
+            if (results.length == 3) {
                 sbr.append(results[0]);
                 value = results[1];
-            } else if(results.length == 2){
+            } else if (results.length == 2) {
                 value = results[0];
             }
 
-            if("----".equals(value)){
+            if ("----".equals(value)) {
                 sbr.append(value).append(",");
-            } else if(i != 11 && "mg/dl".equals(unit)){
-                sbr.append(unitConversion(value,j)).append(",");
-            } else if(i != 11 && "mmol/L".equals(unit)){
+            } else if (i != 11 && "mg/dl".equals(unit)) {
+                sbr.append(unitConversion(value, j)).append(",");
+            } else if (i != 11 && "mmol/L".equals(unit)) {
                 sbr.append(value).append(",");
-            } else if(i != 11 && "g/L".equals(unit)){
-                sbr.append(unitConversion(String.valueOf(Double.parseDouble(value) * 100),j)).append(",");
+            } else if (i != 11 && "g/L".equals(unit)) {
+                sbr.append(unitConversion(String.valueOf(Double.parseDouble(value) * 100), j)).append(",");
             } else {
                 sbr.append(value).append(",");
             }
         }
-        Logger.d(TAG, "血脂4项测量结果:" +  sbr);
+        Logger.d(TAG, "血脂4项测量结果:" + sbr);
         return sbr.substring(0, sbr.length() - 1);
     }
 
-    private static String unitConversion(String input, int type){
+    private static String unitConversion(String input, int type) {
         double value = Double.parseDouble(input);
         NumberFormat df = NumberFormat.getNumberInstance();
         df.setMaximumFractionDigits(2);
         //*胆固醇、高密度脂蛋白、低密度脂蛋白的换算都一样：1mmol/L=38.7mg/dL；
         //*甘油三脂是1mmol/L=88.6mg/dL
 
-        if(type == 0){
+        if (type == 0) {
             return df.format(value / 38.7);
         }
-        if(type == 1){
+        if (type == 1) {
             return df.format(value / 88.6);
         }
-        if(type == 2){
+        if (type == 2) {
             return df.format(value / 38.7);
         }
-        if(type == 3){
+        if (type == 3) {
             return df.format(value / 38.7);
         }
         return null;

@@ -14,7 +14,6 @@ import cn.com.heaton.blelibrary.ble.BleHandler;
 import cn.com.heaton.blelibrary.ble.callback.BleScanCallback;
 
 /**
- *
  * Created by LiuLei on 2017/10/21.
  */
 @Implement(ScanRequest.class)
@@ -67,7 +66,7 @@ public class ScanRequest<T extends BleDevice> implements IMessage {
             if (device == null) return;
             if (TextUtils.isEmpty(device.getName())) return;
             if (!constans(device.getAddress())) {
-                T bleDevice = (T) BleFactory.create(BleDevice.class,  Ble.getInstance(), device);
+                T bleDevice = (T) BleFactory.create(BleDevice.class, Ble.getInstance(), device);
                 mScanCallback.onLeScan(bleDevice, rssi, scanRecord);
                 mScanDevices.add(bleDevice);
             }

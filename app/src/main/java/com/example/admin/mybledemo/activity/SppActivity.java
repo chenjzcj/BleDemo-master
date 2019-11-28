@@ -139,7 +139,7 @@ public class SppActivity extends BaseActivity implements AdapterView.OnItemClick
 
     public void sendData(View view) {
         if (mBtManager.getConnectedDevices().size() == 0) {//若当前没有连接设备则直接返回
-            Toast.makeText(SppActivity.this,"请连接设备后重试",Toast.LENGTH_SHORT).show();
+            Toast.makeText(SppActivity.this, "请连接设备后重试", Toast.LENGTH_SHORT).show();
             return;
         }
         lock = !lock;
@@ -152,9 +152,9 @@ public class SppActivity extends BaseActivity implements AdapterView.OnItemClick
                 oc[2] = 'A';
                 oc[3] = 'T';
                 oc[4] = 'E';
-                oc[5] = (byte) (lock ? '1': '0');
+                oc[5] = (byte) (lock ? '1' : '0');
                 boolean result = mBtManager.getConnectedDevices().get(0).sendOnePacket(oc, 10, true);
-                Log.e(TAG, "sendData: "+result);
+                Log.e(TAG, "sendData: " + result);
             }
         }).start();
     }

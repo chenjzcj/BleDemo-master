@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="AppSuperTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:dialogTheme">@style/DialogTheme.Default</item>
         <item name="android:alertDialogTheme">@style/DialogTheme.Default</item>
         <item name="alertDialogTheme">@style/DialogTheme.Default</item>
         <item name="dialogTheme">@style/DialogTheme.Default</item>
     </style>
+
     <style name="DialogTheme.Default" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:colorBackground">@android:color/transparent</item>
         <item name="android:background">@null</item>
@@ -34,13 +36,16 @@
         <item name="dialogUpdateAppearance">@style/TextAppearance.AppCompat.Medium</item>
         <item name="dialogUpdateProgressBar">?android:attr/progressBarStyleHorizontal</item>
     </style>
+
     <style name="DialogButton" parent="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog">
         <item name="android:layout_width">0dip</item>
         <item name="android:layout_weight">1.0</item>
     </style>
+
     <style name="DialogStyle">
         <item name="android:background">@android:color/transparent</item>
     </style>
+
     <style name="DialogStyle.Parent">
         <item name="android:layout_width">match_parent</item>
         <item name="android:paddingTop">9dip</item>

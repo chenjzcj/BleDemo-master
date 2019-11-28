@@ -11,7 +11,6 @@ import java.util.List;
 import cn.com.heaton.blelibrary.ble.request.IMessage;
 
 /**
- *
  * Created by LiuLei on 2017/10/30.
  */
 
@@ -21,15 +20,15 @@ public class BleHandler extends Handler {
 
     private List<IMessage> receiveMessages = new ArrayList<>();
 
-    public void setHandlerCallback(IMessage receiveMessage){
-        if(!receiveMessages.contains(receiveMessage)){
+    public void setHandlerCallback(IMessage receiveMessage) {
+        if (!receiveMessages.contains(receiveMessage)) {
             receiveMessages.add(receiveMessage);
         }
     }
 
-    public static BleHandler getHandler(){
-        synchronized (BleHandler.class){
-            if(sHandler == null){
+    public static BleHandler getHandler() {
+        synchronized (BleHandler.class) {
+            if (sHandler == null) {
                 HandlerThread handlerThread = new HandlerThread("handler thread");
                 handlerThread.start();
                 sHandler = new BleHandler(handlerThread.getLooper());
@@ -38,13 +37,13 @@ public class BleHandler extends Handler {
         }
     }
 
-    private BleHandler(Looper looper){
+    private BleHandler(Looper looper) {
         super(Looper.myLooper());
     }
 
     @Override
     public void handleMessage(Message msg) {
-        for(IMessage receiveMessage : receiveMessages){
+        for (IMessage receiveMessage : receiveMessages) {
             receiveMessage.handleMessage(msg);
         }
     }

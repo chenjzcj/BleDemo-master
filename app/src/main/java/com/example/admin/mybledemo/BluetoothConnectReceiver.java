@@ -11,18 +11,18 @@ import android.util.Log;
  */
 
 public class BluetoothConnectReceiver extends BroadcastReceiver {
-	public static final String TAG = "BluetoothReceiver";
+    public static final String TAG = "BluetoothReceiver";
 
-	String strPsw = "0000";
+    String strPsw = "0000";
 
-	@Override
-	public void onReceive(Context context, Intent intent) {
-		if (BuildConfig.DEBUG) {
-			Log.d(TAG, "action=" + intent.getAction());
-		}
-		if (intent.getAction().equals("android.bluetooth.device.action.PAIRING_REQUEST")) {
-			BluetoothDevice btDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-			try {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        if (BuildConfig.DEBUG) {
+            Log.d(TAG, "action=" + intent.getAction());
+        }
+        if (intent.getAction().equals("android.bluetooth.device.action.PAIRING_REQUEST")) {
+            BluetoothDevice btDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+            try {
 //				BtUtils.setPin(btDevice.getClass(), btDevice, strPsw); // 手机和蓝牙采集器配对
 //				BtUtils.createBond(btDevice.getClass(), btDevice);
 //				BtUtils.cancelPairingUserInput(btDevice.getClass(), btDevice);
@@ -31,10 +31,10 @@ public class BluetoothConnectReceiver extends BroadcastReceiver {
 //				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 //					btDevice.setPin(pinBytes);
 //				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
 

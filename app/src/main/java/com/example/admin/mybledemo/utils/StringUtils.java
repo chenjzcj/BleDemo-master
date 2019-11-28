@@ -2,7 +2,6 @@ package com.example.admin.mybledemo.utils;
 
 /**
  * Created by LiuLei on 2016/11/29.
- *
  */
 
 public class StringUtils {

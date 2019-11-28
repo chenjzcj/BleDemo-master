@@ -9,20 +9,21 @@
     android:clipToPadding="true"
     tools:context="com.example.admin.mybledemo.activity.BleActivity">
 
-    <include android:id="@+id/toolbar_main"
-        layout="@layout/toolbar_layout"/>
+    <include
+        android:id="@+id/toolbar_main"
+        layout="@layout/toolbar_layout" />
 
     <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:id="@+id/recycle_listView"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"/>-->
+    <!--android:id="@+id/recycle_listView"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"/>-->
     <TextView
         android:id="@+id/connected_num"
         android:layout_below="@id/toolbar_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:text="@string/lined_num"/>
+        android:text="@string/lined_num" />
 
     <Button
         android:id="@+id/sendData"
@@ -30,7 +31,7 @@
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="发送数据"/>
+        android:text="发送数据" />
 
     <Button
         android:id="@+id/updateOta"
@@ -38,7 +39,7 @@
         android:layout_toLeftOf="@+id/sendData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="更新OTA"/>
+        android:text="更新OTA" />
 
     <Button
         android:id="@+id/readRssi"
@@ -46,7 +47,7 @@
         android:layout_toLeftOf="@+id/updateOta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="读取RSSI"/>
+        android:text="读取RSSI" />
 
     <Button
         android:id="@+id/jump"
@@ -56,20 +57,20 @@
         android:layout_height="wrap_content"
         android:onClick="junp"
         android:visibility="gone"
-        android:text="跳转到其他页面"/>
+        android:text="跳转到其他页面" />
 
     <ListView
         android:id="@+id/listView"
         android:layout_below="@id/sendData"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
     <!--<FrameLayout-->
-        <!--android:layout_below="@id/toolbar_main"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
+    <!--android:layout_below="@id/toolbar_main"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
 
-        <!--<include layout="@layout/custom_drawerlayout" />-->
+    <!--<include layout="@layout/custom_drawerlayout" />-->
 
     <!--</FrameLayout>-->
 

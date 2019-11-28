@@ -1,4 +1,5 @@
 package cn.com.heaton.blelibrary.ble.proxy;
+
 import cn.com.heaton.blelibrary.ble.callback.BleConnCallback;
 import cn.com.heaton.blelibrary.ble.callback.BleNotiftCallback;
 import cn.com.heaton.blelibrary.ble.callback.BleReadCallback;
@@ -7,7 +8,6 @@ import cn.com.heaton.blelibrary.ble.callback.BleScanCallback;
 import cn.com.heaton.blelibrary.ble.callback.BleWriteCallback;
 
 /**
- *
  * Created by LiuLei on 2017/10/30.
  */
 
@@ -27,6 +27,6 @@ public interface RequestLisenter<T> {
 
     boolean readRssi(T device, BleReadRssiCallback<T> callback);
 
-    boolean write(T device, byte[]data, BleWriteCallback<T> callback);
+    boolean write(T device, byte[] data, BleWriteCallback<T> callback);
 
 }

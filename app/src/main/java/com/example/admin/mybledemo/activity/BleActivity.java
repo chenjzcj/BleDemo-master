@@ -72,18 +72,18 @@ public class BleActivity extends BaseActivity implements View.OnClickListener, A
     @Override
     protected void onInitView() {
         requestPermission(new String[]{Manifest.permission.BLUETOOTH_ADMIN,
-                Manifest.permission.ACCESS_COARSE_LOCATION},
+                        Manifest.permission.ACCESS_COARSE_LOCATION},
                 "请求蓝牙相关权限", new GrantedResult() {
-            @Override
-            public void onResult(boolean granted) {
-                if(granted){
-                    //初始化蓝牙
-                    initBle();
-                }else {
-                    finish();
-                }
-            }
-        });
+                    @Override
+                    public void onResult(boolean granted) {
+                        if (granted) {
+                            //初始化蓝牙
+                            initBle();
+                        } else {
+                            finish();
+                        }
+                    }
+                });
         initView();
     }
 
@@ -116,7 +116,7 @@ public class BleActivity extends BaseActivity implements View.OnClickListener, A
                     public void onReadRssiSuccess(int rssi) {
                         super.onReadRssiSuccess(rssi);
                         Log.e(TAG, "onReadRssiSuccess: " + rssi);
-                        Toast.makeText(BleActivity.this, "onReadRssiSuccess:"+ rssi, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(BleActivity.this, "onReadRssiSuccess:" + rssi, Toast.LENGTH_SHORT).show();
                     }
                 });
                 break;
@@ -134,9 +134,9 @@ public class BleActivity extends BaseActivity implements View.OnClickListener, A
                         "读写SD卡相关权限", new GrantedResult() {
                             @Override
                             public void onResult(boolean granted) {
-                                if(granted){
+                                if (granted) {
                                     CopyAssetsToSD();
-                                }else {
+                                } else {
                                     Toast.makeText(BleActivity.this, "读写SD卡权限被拒绝,将会影响OTA升级功能哦！", Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -207,18 +207,18 @@ public class BleActivity extends BaseActivity implements View.OnClickListener, A
             Log.e(TAG, "changeLevelInner: " + "发送数据失败!");
         }
     }
-    
+
     /*主动读取数据*/
-    public void read(BleDevice device){
+    public void read(BleDevice device) {
         boolean result = mBle.read(device, new BleReadCallback<BleDevice>() {
             @Override
             public void onReadSuccess(BluetoothGattCharacteristic characteristic) {
                 super.onReadSuccess(characteristic);
                 byte[] data = characteristic.getValue();
-                Log.w(TAG, "onReadSuccess: "+Arrays.toString(data));
+                Log.w(TAG, "onReadSuccess: " + Arrays.toString(data));
             }
         });
-        if(!result){
+        if (!result) {
             Log.d(TAG, "读取数据失败!");
         }
     }
@@ -291,12 +291,12 @@ public class BleActivity extends BaseActivity implements View.OnClickListener, A
 
     /*设置通知的回调*/
     private void setNotify(BleDevice device) {
-         /*连接成功后，设置通知*/
+        /*连接成功后，设置通知*/
         mBle.startNotify(device, new BleNotiftCallback<BleDevice>() {
             @Override
             public void onChanged(BluetoothGattCharacteristic characteristic) {
                 UUID uuid = characteristic.getUuid();
-                Log.e(TAG, "onChanged: "+uuid.toString());
+                Log.e(TAG, "onChanged: " + uuid.toString());
                 Log.e(TAG, "onChanged: " + Arrays.toString(characteristic.getValue()));
                 byte[] data = characteristic.getValue();
                 System.arraycopy(data, 0, mBuff, mReadCount, data.length);

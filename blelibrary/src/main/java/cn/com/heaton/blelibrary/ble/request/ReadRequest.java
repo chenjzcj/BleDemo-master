@@ -11,7 +11,6 @@ import cn.com.heaton.blelibrary.ble.BluetoothLeService;
 import cn.com.heaton.blelibrary.ble.callback.BleReadCallback;
 
 /**
- *
  * Created by LiuLei on 2017/10/23.
  */
 @Implement(ReadRequest.class)
@@ -24,7 +23,7 @@ public class ReadRequest<T extends BleDevice> implements IMessage {
         handler.setHandlerCallback(this);
     }
 
-    public boolean read(T device, BleReadCallback<T> lisenter){
+    public boolean read(T device, BleReadCallback<T> lisenter) {
         this.mBleLisenter = lisenter;
         boolean result = false;
         BluetoothLeService service = Ble.getInstance().getBleService();
@@ -36,9 +35,9 @@ public class ReadRequest<T extends BleDevice> implements IMessage {
 
     @Override
     public void handleMessage(Message msg) {
-        switch (msg.what){
+        switch (msg.what) {
             case BleStates.BleStatus.Read:
-                if(msg.obj instanceof BluetoothGattCharacteristic){
+                if (msg.obj instanceof BluetoothGattCharacteristic) {
                     BluetoothGattCharacteristic characteristic = (BluetoothGattCharacteristic) msg.obj;
                     mBleLisenter.onReadSuccess(characteristic);
                 }

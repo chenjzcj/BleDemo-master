@@ -15,7 +15,6 @@ import cn.com.heaton.blelibrary.ble.L;
 import cn.com.heaton.blelibrary.ble.callback.BleConnCallback;
 
 /**
- *
  * Created by LiuLei on 2017/10/21.
  */
 @Implement(ConnectRequest.class)
@@ -57,7 +56,7 @@ public class ConnectRequest<T extends BleDevice> implements IMessage {
 
     @Override
     public void handleMessage(Message msg) {
-        L.e(TAG, "handleMessage: "+msg.arg1);
+        L.e(TAG, "handleMessage: " + msg.arg1);
         T t = null;
         if (msg.obj instanceof BluetoothDevice) {
             t = getBleDevice((BluetoothDevice) msg.obj);
@@ -140,7 +139,6 @@ public class ConnectRequest<T extends BleDevice> implements IMessage {
     }
 
     /**
-     *
      * @return 已经连接的蓝牙设备集合
      */
 

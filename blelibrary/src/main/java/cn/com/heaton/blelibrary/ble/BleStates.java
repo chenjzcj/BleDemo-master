@@ -13,8 +13,8 @@ import java.lang.annotation.RetentionPolicy;
 public class BleStates {
 
     /**
-     *  注释
-     *  防止重复定义的常量值
+     * 注释
+     * 防止重复定义的常量值
      */
     @IntDef({
             BleStatus.CONNECTED,
@@ -38,7 +38,7 @@ public class BleStates {
     })
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BleStatus{
+    public @interface BleStatus {
         int CONNECTED = 2505;
         int CONNECTING = 2504;
         int DISCONNECT = 2503;
@@ -61,7 +61,7 @@ public class BleStates {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StatusCode{
+    public @interface StatusCode {
         int WriteFailed = -1;
         int WriteSuccess = 0;
         int WriteCancel = -2;

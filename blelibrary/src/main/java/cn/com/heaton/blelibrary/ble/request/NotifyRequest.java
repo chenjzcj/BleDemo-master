@@ -11,7 +11,6 @@ import cn.com.heaton.blelibrary.ble.L;
 import cn.com.heaton.blelibrary.ble.callback.BleNotiftCallback;
 
 /**
- *
  * Created by LiuLei on 2017/10/23.
  */
 @Implement(NotifyRequest.class)
@@ -27,14 +26,14 @@ public class NotifyRequest<T extends BleDevice> implements IMessage {
         L.e(TAG, "NotifyRequest: ++++");
     }
 
-    public void notify(T device, BleNotiftCallback<T> callback){
+    public void notify(T device, BleNotiftCallback<T> callback) {
         this.mBleLisenter = callback;
     }
 
     @Override
     public void handleMessage(Message msg) {
-        if(msg.obj == null)return;
-        switch (msg.what){
+        if (msg.obj == null) return;
+        switch (msg.what) {
             case BleStates.BleStatus.ServicesDiscovered:
                 mBleLisenter.onServicesDiscovered((BluetoothGatt) msg.obj);
                 break;

@@ -20,6 +20,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected final String TAG = this.getClass().getSimpleName();
     public Toolbar toolbar;
     private TextView abTitle;
+
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
@@ -71,8 +72,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /*---------------------------------------------------------------------------以下是android6.0动态授权的封装十分好用---------------------------------------------------------------------------*/
-    private int                   mPermissionIdx = 0x10;//请求权限索引
-    private SparseArray<GrantedResult> mPermissions   = new SparseArray<>();//请求权限运行列表
+    private int mPermissionIdx = 0x10;//请求权限索引
+    private SparseArray<GrantedResult> mPermissions = new SparseArray<>();//请求权限运行列表
 
     @SuppressLint("Override")
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
@@ -87,7 +88,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void requestPermission(String[] permissions, String reason, GrantedResult runnable) {
-        if(runnable == null){
+        if (runnable == null) {
             return;
         }
         runnable.mGranted = false;
@@ -157,11 +158,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    public static abstract class GrantedResult implements Runnable{
+    public static abstract class GrantedResult implements Runnable {
         private boolean mGranted;
+
         public abstract void onResult(boolean granted);
+
         @Override
-        public void run(){
+        public void run() {
             onResult(mGranted);
         }
     }

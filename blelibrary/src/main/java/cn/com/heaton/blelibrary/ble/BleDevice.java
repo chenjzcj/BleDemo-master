@@ -3,19 +3,18 @@ package cn.com.heaton.blelibrary.ble;
 import android.bluetooth.BluetoothDevice;
 
 /**
- *
  * Created by LiuLei on 2016/11/26.
  */
 
 public class BleDevice {
 
-    public final static String          TAG                      = BleDevice.class.getSimpleName();
+    public final static String TAG = BleDevice.class.getSimpleName();
 
     /**
-     *  连接状态
-     *  2503 未连接状态
-     *  2504 正在连接
-     *  2505 连接成功
+     * 连接状态
+     * 2503 未连接状态
+     * 2504 正在连接
+     * 2505 连接成功
      */
     private int mConnectionState = BleStates.BleStatus.DISCONNECT;
 
@@ -62,7 +61,7 @@ public class BleDevice {
         return mConnectionState;
     }
 
-    public void setConnectionState(@BleStates.BleStatus int state){
+    public void setConnectionState(@BleStates.BleStatus int state) {
         mConnectionState = state;
     }
 

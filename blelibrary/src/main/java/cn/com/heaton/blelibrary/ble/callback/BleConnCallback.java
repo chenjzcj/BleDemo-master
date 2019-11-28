@@ -6,16 +6,21 @@ package cn.com.heaton.blelibrary.ble.callback;
 
 public abstract class BleConnCallback<T> {
     /**
-     *  The callback is disconnected or connected when the connection is changed
+     * The callback is disconnected or connected when the connection is changed
+     *
      * @param device ble device object
      */
     public abstract void onConnectionChanged(T device);
 
     /**
-     *  When the callback when the error, such as app can only connect four devices
-     *  at the same time forcing the user to connect more than four devices will call back the method
-     *  @param device ble device object
+     * When the callback when the error, such as app can only connect four devices
+     * at the same time forcing the user to connect more than four devices will call back the method
+     *
+     * @param device    ble device object
      * @param errorCode errorCode
      */
-    public void onConnectException(T device,int errorCode){};
+    public void onConnectException(T device, int errorCode) {
+    }
+
+    ;
 }

@@ -8,6 +8,7 @@ import android.bluetooth.BluetoothGattCharacteristic;
 
 public abstract class BleReadCallback<T> {
 
-    public void onReadSuccess(BluetoothGattCharacteristic characteristic){}
+    public void onReadSuccess(BluetoothGattCharacteristic characteristic) {
+    }
 
 }

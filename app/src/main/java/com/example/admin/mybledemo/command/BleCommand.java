@@ -3,7 +3,6 @@ package com.example.admin.mybledemo.command;
 import java.util.LinkedList;
 
 /**
- *
  * Created by LiuLei on 2017/11/6.
  */
 
@@ -23,7 +22,7 @@ public class BleCommand implements ConcreteCommand {
 
     @Override
     public void execute() {
-        for (Command command : commands){
+        for (Command command : commands) {
             command.execute();
         }
     }

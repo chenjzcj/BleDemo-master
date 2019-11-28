@@ -11,7 +11,6 @@ import cn.com.heaton.blelibrary.ble.BluetoothLeService;
 import cn.com.heaton.blelibrary.ble.callback.BleWriteCallback;
 
 /**
- *
  * Created by LiuLei on 2017/10/23.
  */
 @Implement(WriteRequest.class)
@@ -24,21 +23,21 @@ public class WriteRequest<T extends BleDevice> implements IMessage {
         handler.setHandlerCallback(this);
     }
 
-    public boolean write(T device,byte[]data, BleWriteCallback<T> lisenter){
+    public boolean write(T device, byte[] data, BleWriteCallback<T> lisenter) {
         this.mBleLisenter = lisenter;
         boolean result = false;
         BluetoothLeService service = Ble.getInstance().getBleService();
         if (Ble.getInstance() != null && service != null) {
-            result = service.wirteCharacteristic(device.getBleAddress(),data);
+            result = service.wirteCharacteristic(device.getBleAddress(), data);
         }
         return result;
     }
 
     @Override
     public void handleMessage(Message msg) {
-        switch (msg.what){
+        switch (msg.what) {
             case BleStates.BleStatus.Write:
-                if(msg.obj instanceof BluetoothGattCharacteristic){
+                if (msg.obj instanceof BluetoothGattCharacteristic) {
                     BluetoothGattCharacteristic characteristic = (BluetoothGattCharacteristic) msg.obj;
                     mBleLisenter.onWriteSuccess(characteristic);
                 }

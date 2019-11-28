@@ -1,7 +1,6 @@
 package com.example.admin.mybledemo.command;
 
 /**
- *
  * Created by LiuLei on 2017/11/6.
  */
 

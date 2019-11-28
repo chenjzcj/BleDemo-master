@@ -17,16 +17,15 @@ import cn.com.heaton.blelibrary.ble.request.ScanRequest;
 import cn.com.heaton.blelibrary.ble.request.WriteRequest;
 
 /**
- *
  * Created by LiuLei on 2017/10/30.
  */
 
-public class RequestImpl<T extends BleDevice> implements RequestLisenter<T>{
+public class RequestImpl<T extends BleDevice> implements RequestLisenter<T> {
 
     private static RequestImpl instance = new RequestImpl();
     private static Ble.Options options;
 
-    public static RequestImpl getInstance(Ble.Options opts){
+    public static RequestImpl getInstance(Ble.Options opts) {
         options = opts;
         return instance;
     }

@@ -6,5 +6,6 @@ package cn.com.heaton.blelibrary.ble.callback;
 
 public abstract class BleReadRssiCallback<T> {
 
-    public void onReadRssiSuccess(int rssi){}
+    public void onReadRssiSuccess(int rssi) {
+    }
 }

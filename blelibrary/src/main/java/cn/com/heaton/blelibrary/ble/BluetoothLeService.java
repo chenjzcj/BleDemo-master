@@ -221,7 +221,6 @@ public class BluetoothLeService extends Service {
     }
 
     /**
-     *
      * @return 已经连接的设备集合
      */
     public List<BluetoothDevice> getConnectedDevices() {
@@ -437,6 +436,7 @@ public class BluetoothLeService extends Service {
 
     /**
      * 读取远程RSSI
+     *
      * @param address 蓝牙地址
      * @return 是否读取RSSI成功(这个是客户端的主观认为)
      */
@@ -449,9 +449,9 @@ public class BluetoothLeService extends Service {
         if (gattCharacteristic != null) {
             try {
 //                if (mOptions.uuid_read_cha.equals(gattCharacteristic.getUuid())) {
-                    boolean result = mBluetoothGattMap.get(address).readRemoteRssi();
-                    L.d(TAG, address + " -- read result:" + result);
-                    return result;
+                boolean result = mBluetoothGattMap.get(address).readRemoteRssi();
+                L.d(TAG, address + " -- read result:" + result);
+                return result;
 //                }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -463,7 +463,8 @@ public class BluetoothLeService extends Service {
 
     /**
      * 读取数据
-     * @param address   蓝牙地址
+     *
+     * @param address        蓝牙地址
      * @param characteristic 蓝牙特征对象
      */
     public void readCharacteristic(String address, BluetoothGattCharacteristic characteristic) {
@@ -480,7 +481,7 @@ public class BluetoothLeService extends Service {
      *
      * @param address        蓝牙地址
      * @param characteristic 通知特征对象
-     * @param enabled   是否设置通知使能
+     * @param enabled        是否设置通知使能
      */
     public void setCharacteristicNotification(String address,
                                               BluetoothGattCharacteristic characteristic, boolean enabled) {
@@ -494,12 +495,12 @@ public class BluetoothLeService extends Service {
             //Filter descriptors based on the uuid of the descriptor
 //            BluetoothGattDescriptor descriptor = characteristic.getDescriptor(mOptions.uuid_notify_desc);
             List<BluetoothGattDescriptor> descriptors = characteristic.getDescriptors();
-            for(BluetoothGattDescriptor descriptor : descriptors){
+            for (BluetoothGattDescriptor descriptor : descriptors) {
                 if (descriptor != null) {
                     //Write the description value
-                    if((characteristic.getProperties() & BluetoothGattCharacteristic.PROPERTY_NOTIFY) != 0){
+                    if ((characteristic.getProperties() & BluetoothGattCharacteristic.PROPERTY_NOTIFY) != 0) {
                         descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
-                    }else if((characteristic.getProperties() & BluetoothGattCharacteristic.PROPERTY_INDICATE) != 0){
+                    } else if ((characteristic.getProperties() & BluetoothGattCharacteristic.PROPERTY_INDICATE) != 0) {
                         descriptor.setValue(BluetoothGattDescriptor.ENABLE_INDICATION_VALUE);
                     }
                     mBluetoothGattMap.get(address).writeDescriptor(descriptor);
@@ -511,7 +512,8 @@ public class BluetoothLeService extends Service {
 
     /**
      * 设置通知数组
-     * @param address 蓝牙地址
+     *
+     * @param address      蓝牙地址
      * @param gattServices 蓝牙服务集合
      */
     private void displayGattServices(final String address, List<BluetoothGattService> gattServices) {
@@ -544,11 +546,13 @@ public class BluetoothLeService extends Service {
                         L.e("mWriteCharacteristic", uuid);
                         mWriteCharacteristicMap.put(address, gattCharacteristic);
                         //Notification feature
-                    } if (uuid.equals(mOptions.uuid_read_cha.toString())) {
+                    }
+                    if (uuid.equals(mOptions.uuid_read_cha.toString())) {
                         L.e("mReadCharacteristic", uuid);
                         mReadCharacteristicMap.put(address, gattCharacteristic);
                         //Notification feature
-                    } if ((gattCharacteristic.getProperties() & BluetoothGattCharacteristic.PROPERTY_NOTIFY) != 0) {
+                    }
+                    if ((gattCharacteristic.getProperties() & BluetoothGattCharacteristic.PROPERTY_NOTIFY) != 0) {
                         mNotifyCharacteristics.add(gattCharacteristic);
                         L.e("mNotifyCharacteristics", "PROPERTY_NOTIFY");
                     }
@@ -564,8 +568,9 @@ public class BluetoothLeService extends Service {
 
     /**
      * 获取可写特征对象
+     *
      * @param address 蓝牙地址
-     * @return  可写特征对象
+     * @return 可写特征对象
      */
     public BluetoothGattCharacteristic getWriteCharacteristic(String address) {
         synchronized (mLocker) {
@@ -578,8 +583,9 @@ public class BluetoothLeService extends Service {
 
     /**
      * 获取可读特征对象
+     *
      * @param address 蓝牙地址
-     * @return  可读特征对象
+     * @return 可读特征对象
      */
     public BluetoothGattCharacteristic getReadCharacteristic(String address) {
         synchronized (mLocker) {

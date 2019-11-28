@@ -14,11 +14,10 @@ import cn.com.heaton.blelibrary.ble.request.ScanRequest;
 import cn.com.heaton.blelibrary.ble.request.WriteRequest;
 
 /**
- *
  * Created by LiuLei on 2017/9/1.
  */
 
-public class RequestProxy implements InvocationHandler{
+public class RequestProxy implements InvocationHandler {
     private static final String TAG = "RequestProxy";
 
     private Object tar;
@@ -26,15 +25,15 @@ public class RequestProxy implements InvocationHandler{
     private static RequestProxy instance = new RequestProxy();
 
 
-    public static RequestProxy getInstance(){
+    public static RequestProxy getInstance() {
         return instance;
     }
 
     //Bind the delegate object and return the proxy class
-    public Object bindProxy(Object tar){
+    public Object bindProxy(Object tar) {
         this.tar = tar;
         //绑定委托对象，并返回代理类
-        L.e(TAG, "bindProxy: "+"Binding agent successfully");
+        L.e(TAG, "bindProxy: " + "Binding agent successfully");
         Rproxy.getInstance().init(ScanRequest.class,
                 ConnectRequest.class,
                 NotifyRequest.class,
@@ -50,6 +49,6 @@ public class RequestProxy implements InvocationHandler{
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        return method.invoke(tar,args);
+        return method.invoke(tar, args);
     }
 }

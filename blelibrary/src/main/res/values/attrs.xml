@@ -5,7 +5,7 @@
     <attr name="round_radius" format="dimension" />
 
     <declare-styleable name="CheckableItemView">
-        <attr name="check_id" format="reference"/>
+        <attr name="check_id" format="reference" />
     </declare-styleable>
     <declare-styleable name="DataView">
         <attr name="state_first" format="boolean" />
@@ -22,36 +22,36 @@
         <attr name="round_radius" />
     </declare-styleable>
 
-    <attr name="dialogTopMinHeight" format="dimension"/>
-    <attr name="dialogButtonMinHeight" format="dimension"/>
+    <attr name="dialogTopMinHeight" format="dimension" />
+    <attr name="dialogButtonMinHeight" format="dimension" />
 
-    <attr name="dialogTopMarginLeft" format="dimension"/>
-    <attr name="dialogTopMarginRight" format="dimension"/>
-    <attr name="dialogTopMarginTop" format="dimension"/>
-    <attr name="dialogTopMarginBottom" format="dimension"/>
+    <attr name="dialogTopMarginLeft" format="dimension" />
+    <attr name="dialogTopMarginRight" format="dimension" />
+    <attr name="dialogTopMarginTop" format="dimension" />
+    <attr name="dialogTopMarginBottom" format="dimension" />
 
-    <attr name="dialogIconPaddingLeft" format="dimension"/>
-    <attr name="dialogIconPaddingTop" format="dimension"/>
-    <attr name="dialogIconPaddingRight" format="dimension"/>
-    <attr name="dialogIconPaddingBottom" format="dimension"/>
+    <attr name="dialogIconPaddingLeft" format="dimension" />
+    <attr name="dialogIconPaddingTop" format="dimension" />
+    <attr name="dialogIconPaddingRight" format="dimension" />
+    <attr name="dialogIconPaddingBottom" format="dimension" />
 
-    <attr name="dialogTitleDividerHeight" format="dimension"/>
+    <attr name="dialogTitleDividerHeight" format="dimension" />
 
 
-    <attr name="dialogScrollPaddingLeft" format="dimension"/>
-    <attr name="dialogScrollPaddingTop" format="dimension"/>
-    <attr name="dialogScrollPaddingRight" format="dimension"/>
-    <attr name="dialogScrollPaddingBottom" format="dimension"/>
+    <attr name="dialogScrollPaddingLeft" format="dimension" />
+    <attr name="dialogScrollPaddingTop" format="dimension" />
+    <attr name="dialogScrollPaddingRight" format="dimension" />
+    <attr name="dialogScrollPaddingBottom" format="dimension" />
 
-    <attr name="dialogMessagePadding" format="dimension"/>
-    <attr name="dialogTitleAppearance" format="reference"/>
-    <attr name="dialogMessageAppearance" format="reference"/>
-    <attr name="dialogLeftButtonStyle" format="reference"/>
-    <attr name="dialogCenterButtonStyle" format="reference"/>
-    <attr name="dialogRightButtonStyle" format="reference"/>
+    <attr name="dialogMessagePadding" format="dimension" />
+    <attr name="dialogTitleAppearance" format="reference" />
+    <attr name="dialogMessageAppearance" format="reference" />
+    <attr name="dialogLeftButtonStyle" format="reference" />
+    <attr name="dialogCenterButtonStyle" format="reference" />
+    <attr name="dialogRightButtonStyle" format="reference" />
 
-    <attr name="dialogParent" format="reference"/>
+    <attr name="dialogParent" format="reference" />
 
-    <attr name="dialogUpdateAppearance" format="reference"/>
-    <attr name="dialogUpdateProgressBar" format="reference"/>
+    <attr name="dialogUpdateAppearance" format="reference" />
+    <attr name="dialogUpdateProgressBar" format="reference" />
 </resources>

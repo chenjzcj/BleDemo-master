@@ -13,11 +13,10 @@ import java.util.ArrayList;
 import cn.com.heaton.blelibrary.spp.BtDevice;
 
 /**
- *
  * Created by LiuLei on 2017/9/25.
  */
 
-public class BtDeviceAdapter extends BaseAdapter{
+public class BtDeviceAdapter extends BaseAdapter {
     private ArrayList<BtDevice> mBtDevices;
     private LayoutInflater mInflator;
 
@@ -75,12 +74,11 @@ public class BtDeviceAdapter extends BaseAdapter{
         final BtDevice device = mBtDevices.get(i);
         final String deviceName = device.getName();
         final String deviceRSSI = BluetoothDevice.EXTRA_RSSI;
-        if(device.isConnecting()){
+        if (device.isConnecting()) {
             viewHolder.deviceState.setText("正在连接中...");
-        }
-        else if(device.isConnected()){
+        } else if (device.isConnected()) {
             viewHolder.deviceState.setText("已连接");
-        }else {
+        } else {
             viewHolder.deviceState.setText("未连接");
         }
         if (deviceName != null && deviceName.length() > 0)

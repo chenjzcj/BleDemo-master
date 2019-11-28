@@ -16,11 +16,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void ble(View view){
-        startActivity(new Intent(MainActivity.this,BleActivity.class));
+    public void ble(View view) {
+        startActivity(new Intent(MainActivity.this, BleActivity.class));
     }
 
-    public void spp(View view){
-        startActivity(new Intent(MainActivity.this,SppActivity.class));
+    public void spp(View view) {
+        startActivity(new Intent(MainActivity.this, SppActivity.class));
     }
 }

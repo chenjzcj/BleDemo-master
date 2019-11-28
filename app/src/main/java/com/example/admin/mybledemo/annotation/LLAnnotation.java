@@ -14,32 +14,32 @@ import java.lang.reflect.Method;
 
 public class LLAnnotation {
 
-    public static void viewInit(final Activity activity){
+    public static void viewInit(final Activity activity) {
         Class<?> cls = activity.getClass();
 
         // 遍历属性
         Field[] fields = cls.getDeclaredFields();
-        if(fields != null && fields.length > 0){
-            for (Field field : fields){
+        if (fields != null && fields.length > 0) {
+            for (Field field : fields) {
                 //获取字段的注解，如果没有ViewInit注解，则返回null
                 ViewInit viewInit = field.getAnnotation(ViewInit.class);
-                if(viewInit != null){
+                if (viewInit != null) {
                     //获取字段注解的参数，这就是我们传进去控件ID
                     int viewId = viewInit.value();
-                    if(viewId != -1){
+                    if (viewId != -1) {
                         try {
                             // 获取类中的findViewById方法，参数为int
-                            Method method = cls.getMethod("findViewById",int.class);
+                            Method method = cls.getMethod("findViewById", int.class);
                             //执行该方法，返回一个Object类型的View实例
-                            Object resView = method.invoke(activity,viewId);
+                            Object resView = method.invoke(activity, viewId);
                             field.setAccessible(true);
                             //把字段的值设置为该View的实例
-                            field.set(activity,resView);
+                            field.set(activity, resView);
                         } catch (NoSuchMethodException e) {
                             e.printStackTrace();
-                        }catch (IllegalAccessException e){
+                        } catch (IllegalAccessException e) {
                             e.printStackTrace();
-                        }catch (InvocationTargetException e){
+                        } catch (InvocationTargetException e) {
                             e.printStackTrace();
                         }
                     }
@@ -49,10 +49,10 @@ public class LLAnnotation {
 
         //遍历方法
         Method[] methods = cls.getDeclaredMethods();
-        for(final Method method : methods){
+        for (final Method method : methods) {
             //找到有OnClick注解的方法
             OnClick onClick = method.getAnnotation(OnClick.class);
-            if(onClick != null){
+            if (onClick != null) {
                 //通过id获取到View，再对view设置点击事件
                 activity.findViewById(onClick.value()).setOnClickListener(new View.OnClickListener() {
                     @Override
