@@ -1,10 +1,5 @@
 package cn.com.heaton.blelibrary.ble;
 
-import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothGatt;
-import android.bluetooth.BluetoothGattCharacteristic;
-
-
 /**This class is provide interface for BLE states
  * Created by liulei on 2016/11/25.
  */

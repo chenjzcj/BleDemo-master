@@ -1,8 +1,5 @@
 package com.example.admin.mybledemo;
 
-import android.content.Intent;
-import android.view.View;
-
 /**
  * 静态数据类，用于保存全局静态变量
  * Created by LiuLei on 2016/9/25.

@@ -1,17 +1,6 @@
 package cn.com.heaton.blelibrary.ble;
 
-import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothGatt;
-import android.bluetooth.BluetoothGattCharacteristic;
-import android.os.Handler;
-import android.os.Looper;
-import android.text.TextUtils;
-import android.util.Log;
-
-import java.util.concurrent.atomic.AtomicBoolean;
-
-import cn.com.heaton.blelibrary.ota.OtaListener;
 
 /**
  *

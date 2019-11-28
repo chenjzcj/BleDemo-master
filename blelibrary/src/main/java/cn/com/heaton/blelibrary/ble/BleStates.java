@@ -1,11 +1,9 @@
 package cn.com.heaton.blelibrary.ble;
 
 import android.support.annotation.IntDef;
-import android.text.TextUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.util.UUID;
 
 /**
  * This class sets various static property values for Bluetooth

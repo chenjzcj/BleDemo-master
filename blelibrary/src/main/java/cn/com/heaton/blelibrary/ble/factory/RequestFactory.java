@@ -1,7 +1,5 @@
 package cn.com.heaton.blelibrary.ble.factory;
 
-import android.util.Log;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;

@@ -9,9 +9,9 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.concurrent.Semaphore;
 
+import cn.com.heaton.blelibrary.BuildConfig;
 import cn.com.heaton.blelibrary.ble.Ble;
 import cn.com.heaton.blelibrary.ble.BleDevice;
-import cn.com.heaton.blelibrary.BuildConfig;
 
 /**
  * OTA Update Manager

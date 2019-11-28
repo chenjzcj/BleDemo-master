@@ -15,10 +15,10 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 
-import cn.com.heaton.blelibrary.ble.Ble;
-import cn.com.heaton.blelibrary.ble.BleDevice;
 import cn.com.heaton.blelibrary.BuildConfig;
 import cn.com.heaton.blelibrary.R;
+import cn.com.heaton.blelibrary.ble.Ble;
+import cn.com.heaton.blelibrary.ble.BleDevice;
 
 /**
  * OTA  Manager

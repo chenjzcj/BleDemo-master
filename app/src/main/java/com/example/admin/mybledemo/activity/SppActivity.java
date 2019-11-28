@@ -2,7 +2,6 @@ package com.example.admin.mybledemo.activity;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,7 +13,6 @@ import android.widget.Toast;
 
 import com.example.admin.mybledemo.BtDeviceAdapter;
 import com.example.admin.mybledemo.R;
-import com.example.admin.mybledemo.annotation.LLAnnotation;
 import com.example.admin.mybledemo.annotation.ViewInit;
 import com.orhanobut.logger.Logger;
 
